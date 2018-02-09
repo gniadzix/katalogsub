@@ -23,6 +23,8 @@ public class LoginController {
 
             KatalogsubApplication.showView(MenuAdminView.class);
             menuAdminController.loadWindow();
+            txfLogin.clear();
+            txfPassword.clear();
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

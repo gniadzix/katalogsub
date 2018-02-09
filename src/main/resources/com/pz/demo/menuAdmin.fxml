@@ -102,7 +102,7 @@
             <Insets top="20.0" />
          </GridPane.margin>
       </Label>
-      <TextField prefHeight="25.0" prefWidth="100.0" GridPane.rowIndex="1">
+      <TextField fx:id="txfSubNameToDelete" prefHeight="25.0" prefWidth="100.0" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets bottom="80.0" left="350.0" right="350.0" />
          </GridPane.margin>
@@ -115,7 +115,7 @@
             <Insets left="80.0" top="10.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="btnDelete" mnemonicParsing="false" text="Usuń!" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+      <Button fx:id="btnDelete" mnemonicParsing="false" text="Usuń!" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" onAction="#deleteSub">
          <font>
             <Font size="15.0" />
          </font>

@@ -1,5 +1,6 @@
 package com.pz.demo.DataBase;
 
+import com.pz.demo.MyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -65,8 +66,20 @@ public class DBManager {
         return image;
     }
 
-    public void saveNewSubs(String nazwaSubstancji, String nazwaKategorii, String opis, String urlObrazka, String urlFilmu){
+    public void saveNewSubs(String nazwaSubstancji, String nazwaKategorii, String opis, String urlObrazka, String urlFilmu) {
         long idKat = this.rodzajsubstancjiRepository.findRodzajsubstancjiByNazwaRodzaju(nazwaKategorii).getIdRodzaju();
         this.substancjaRepository.save(Substancja.builder().nazwaSubstancji(nazwaSubstancji).idKategorii(idKat).opis(opis).urlObrazka(urlObrazka).urlFilmu(urlFilmu).build());
+    }
+
+    public void deleteSub(String subName) {
+        this.substancjaRepository.delete(this.substancjaRepository.findSubstancjaByNazwaSubstancji(subName).getIdSubstancja());
+    }
+
+    public List<String> nameCheck() {
+        List<String> list = new ArrayList<>();
+        for (Substancja substancja : this.substancjaRepository.findAll()) {
+            list.add(substancja.getNazwaSubstancji());
+        }
+        return list;
     }
 }

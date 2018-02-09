@@ -61,8 +61,4 @@ public class MenuController {
             });
         }
     }
-
-    public void loadLiquids() {
-        loadMenus();
-    }
 }

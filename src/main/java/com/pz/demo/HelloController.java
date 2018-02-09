@@ -16,8 +16,15 @@ public class HelloController {
 
     public void goToMenu() {
         KatalogsubApplication.showView(MenuView.class);
-        //dbManager.loadTestData();
-        //dbManager.printTestData();
+        try {
+            dbManager.loadTestData();
+        }
+        catch (Exception ex){}
+        finally {
+            menuController.loadMenus();
+        }
+        //
+        dbManager.printTestData();
         //menuController.loadMenus();
 
     }
