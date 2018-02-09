@@ -75,11 +75,8 @@ public class DBManager {
         this.substancjaRepository.delete(this.substancjaRepository.findSubstancjaByNazwaSubstancji(subName).getIdSubstancja());
     }
 
-    public List<String> nameCheck() {
-        List<String> list = new ArrayList<>();
-        for (Substancja substancja : this.substancjaRepository.findAll()) {
-            list.add(substancja.getNazwaSubstancji());
-        }
-        return list;
+    public boolean search(String text) {
+        if(this.substancjaRepository.exists(this.substancjaRepository.findSubstancjaByNazwaSubstancji(text).getIdSubstancja())) return true;
+        else return false;
     }
 }
