@@ -23,10 +23,7 @@ public class HelloController {
         finally {
             menuController.loadMenus();
         }
-        //
         dbManager.printTestData();
-        //menuController.loadMenus();
-
     }
 
     public void openAdmPane() {

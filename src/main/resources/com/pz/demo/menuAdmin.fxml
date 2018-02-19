@@ -86,7 +86,7 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="btnClear1" mnemonicParsing="false" text="Wyczyść pola" GridPane.halignment="CENTER">
+      <Button fx:id="btnClear1" mnemonicParsing="false" text="Wyczyść pola" GridPane.halignment="CENTER" onAction="#clearAddSub">
          <GridPane.margin>
             <Insets top="370.0" />
          </GridPane.margin>
@@ -107,7 +107,7 @@
             <Insets bottom="80.0" left="350.0" right="350.0" />
          </GridPane.margin>
       </TextField>
-      <Button fx:id="btnClear2" mnemonicParsing="false" text="Wyczyść pola" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+      <Button fx:id="btnClear2" mnemonicParsing="false" text="Wyczyść pola" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" onAction="#clearDeleteSub">
          <font>
             <Font size="15.0" />
          </font>

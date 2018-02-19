@@ -42,28 +42,54 @@ public class MenuAdminController {
         txfPicUrl.clear();
         txfVidUrl.clear();
     }
-    public void loadWindow(){
+
+    public void loadWindow() {
         generes = dbManager.loadGeneres();
-        for (int i=0; i<generes.size();i++) {
+        for (int i = 0; i < generes.size(); i++) {
             dlGenere.getItems().add(generes.get(i));
         }
 
     }
 
     public void newSub() {
-        dbManager.saveNewSubs(txfName.getText(),dlGenere.getSelectionModel().getSelectedItem().toString(),txaDesc.getText(),txfPicUrl.getText(),txfVidUrl.getText());
-        dbManager.printTestData();
+        if (txfName.getText().isEmpty() || txaDesc.getText().isEmpty() || txfPicUrl.getText().isEmpty() || txfVidUrl.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Puste pola");
+            alert.setHeaderText("Wprowadź wszystkie dane");
+            alert.show();
+        } else {
+            try {
+                dbManager.saveNewSubs(txfName.getText(), dlGenere.getSelectionModel().getSelectedItem().toString(), txaDesc.getText(), txfPicUrl.getText(), txfVidUrl.getText());
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Błąd");
+                alert.setHeaderText("Nie udało zapisać się do bazy danych, spróbój ponownie");
+                alert.show();
+            }
+            dbManager.printTestData();
+        }
     }
 
     public void deleteSub() {
         try {
             dbManager.deleteSub(txfSubNameToDelete.getText());
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Brak substancji");
             alert.setHeaderText("Błędna nazwa substancji. Wprowadź poprawne dane");
             alert.show();
         }
+    }
+
+    public void clearAddSub() {
+        txfName.clear();
+        dlGenere.setValue(null);
+        txaDesc.clear();
+        txfPicUrl.clear();
+        txfVidUrl.clear();
+    }
+
+    public void clearDeleteSub() {
+        txfSubNameToDelete.clear();
     }
 }
