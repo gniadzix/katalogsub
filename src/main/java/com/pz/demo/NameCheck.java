@@ -19,7 +19,7 @@ public class NameCheck {
     }
 
     public void check() throws MyException {
-        if(subName == "kurwa") throw new MyException();
+        if(subName.contains("kurwa")) throw new MyException();
     }
 
 

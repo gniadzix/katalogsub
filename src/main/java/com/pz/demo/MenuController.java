@@ -72,7 +72,13 @@ public class MenuController {
             } catch (MyException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Brak substancji");
-                alert.setHeaderText("Błędna nazwa substancji. Wprowadź poprawne dane");
+                alert.setHeaderText("Błędna nazwa substancji. Wprowadź poprawne dane. Nie przeklinaj");
+                alert.show();
+            }
+            catch (NullPointerException ex){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Brak substancji");
+                alert.setHeaderText("Błędna nazwa substancji. Wprowadź poprawne dane.");
                 alert.show();
             }
         }
