@@ -16,6 +16,7 @@ import java.util.stream.Stream;
 public class KatalogsubApplication extends AbstractJavaFxApplicationSupport {
 
 
+
     public static void main(String[] args) {
         launchApp(KatalogsubApplication.class, HelloView.class, args);
     }

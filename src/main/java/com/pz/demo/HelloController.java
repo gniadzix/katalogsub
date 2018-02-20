@@ -5,14 +5,22 @@ import de.felixroske.jfxsupport.FXMLController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import org.springframework.beans.factory.annotation.Autowired;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
+
+import java.util.List;
 
 @FXMLController
 public class HelloController {
     @Autowired
     private DBManager dbManager = DBManager.getInstance();
-    @Autowired
-    private MenuController menuController;
+    @FXML
+    private Label lblTwitter;
 
     public void goToMenu() {
         KatalogsubApplication.showView(MenuView.class);
@@ -20,14 +28,25 @@ public class HelloController {
             dbManager.loadTestData();
         }
         catch (Exception ex){}
-        //finally {
-          //  menuController.loadMenus();
-        //}
         dbManager.printTestData();
     }
 
     public void openAdmPane() {
         KatalogsubApplication.showView(LoginView.class);
         dbManager.loadTestData();
+    }
+
+    public void loadTwitter() throws TwitterException {
+        ConfigurationBuilder cb = new ConfigurationBuilder();
+        cb.setOAuthConsumerKey("fn6CqDgi6hRokpZPjw5NdkaSp");
+        cb.setOAuthConsumerSecret("0vqpuy8gcIT666TKaf7sfsxctqG9LI0mCwfeJaxhS2KdLU9cVO");
+        cb.setOAuthAccessToken("965953184035475457-T8Iw3aowky2FXRKKelNZ6AThcoXb1Am");
+        cb.setOAuthAccessTokenSecret("RTxDK57ZTNXpfcOIIeCtSAQkJqFT6e3j3ge3JpELXMP3c");
+        Twitter twitter = new TwitterFactory(cb.build()).getInstance();
+        List<Status> statuses = twitter.getHomeTimeline();
+        for (Status status : statuses) {
+            lblTwitter.setText(status.getUser().getName() + ":" +
+                    status.getText());
+        }
     }
 }
