@@ -89,10 +89,10 @@
       </Button>
       <Pane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button fx:id="btnLiquids" layoutX="14.0" layoutY="94.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="93.0" text="Ciecze" />
-            <Button fx:id="btnGases" layoutX="222.0" layoutY="94.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="93.0" text="Gazy" />
-            <Button fx:id="btnSolids" layoutX="108.0" layoutY="94.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Substancje Stałe" />
-            <ListView fx:id="listView" layoutX="19.0" layoutY="135.0" prefHeight="421.0" prefWidth="290.0" />
+            <Button fx:id="btnLiquids" layoutX="14.0" layoutY="94.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="93.0" text="Ciecze" onAction="#showLiquids" />
+            <Button fx:id="btnGases" layoutX="222.0" layoutY="94.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="93.0" text="Gazy" onAction="#showGas"/>
+            <Button fx:id="btnSolids" layoutX="108.0" layoutY="94.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Substancje Stałe" onAction="#showConstSubs" />
+            <ListView fx:id="listView" layoutX="19.0" layoutY="135.0" prefHeight="421.0" prefWidth="290.0" onMouseClicked="#selectSub" />
          </children>
       </Pane>
    </children>

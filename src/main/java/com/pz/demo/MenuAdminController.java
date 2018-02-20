@@ -36,7 +36,7 @@ public class MenuAdminController {
 
     public void openStart() {
         KatalogsubApplication.showView(MenuView.class);
-        menuController.loadMenus();
+        //menuController.loadMenus();
         txaDesc.clear();
         txfName.clear();
         txfPicUrl.clear();

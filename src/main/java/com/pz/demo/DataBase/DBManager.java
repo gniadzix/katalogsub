@@ -1,6 +1,8 @@
 package com.pz.demo.DataBase;
 
-import com.pz.demo.MyException;
+import com.pz.demo.NullSubstanceException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -34,8 +36,8 @@ public class DBManager {
         testData.printData();
     }
 
-    public List<String> loadLiquids() {
-        List<String> liquids = new ArrayList<>();
+    public ObservableList<String> loadLiquids() {
+        ObservableList<String> liquids = FXCollections.observableArrayList();
         for (Substancja substancja : this.substancjaRepository.findAll()
                 ) {
             if (substancja.getIdKategorii() == this.rodzajsubstancjiRepository.findRodzajsubstancjiByNazwaRodzaju("ciecz").getIdRodzaju()) {
@@ -75,8 +77,37 @@ public class DBManager {
         this.substancjaRepository.delete(this.substancjaRepository.findSubstancjaByNazwaSubstancji(subName).getIdSubstancja());
     }
 
-    public boolean search(String text) {
-        if(this.substancjaRepository.exists(this.substancjaRepository.findSubstancjaByNazwaSubstancji(text).getIdSubstancja())) return true;
-        else return false;
+    public void search(String text) throws NullSubstanceException {
+        try {
+            if (this.substancjaRepository.exists(this.substancjaRepository.findSubstancjaByNazwaSubstancji(text).getIdSubstancja()));
+        } catch (NullPointerException ex) {
+            throw new NullSubstanceException();
+        }
+    }
+
+    public ObservableList<String> loadGas() {
+        ObservableList<String> gas = FXCollections.observableArrayList();
+        for (Substancja substancja : this.substancjaRepository.findAll()
+                ) {
+            if (substancja.getIdKategorii() == this.rodzajsubstancjiRepository.findRodzajsubstancjiByNazwaRodzaju("gaz").getIdRodzaju()) {
+                gas.add(substancja.getNazwaSubstancji());
+            }
+        }
+
+        return gas;
+
+    }
+
+    public ObservableList<String> loadConstSub() {
+        ObservableList<String> sub = FXCollections.observableArrayList();
+        for (Substancja substancja : this.substancjaRepository.findAll()
+                ) {
+            if (substancja.getIdKategorii() == this.rodzajsubstancjiRepository.findRodzajsubstancjiByNazwaRodzaju("gaz").getIdRodzaju()) {
+                sub.add(substancja.getNazwaSubstancji());
+            }
+        }
+
+        return sub;
+
     }
 }

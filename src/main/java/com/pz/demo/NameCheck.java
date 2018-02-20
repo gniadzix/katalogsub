@@ -1,7 +1,6 @@
 package com.pz.demo;
 
 import com.pz.demo.DataBase.DBManager;
-import org.springframework.aop.target.LazyInitTargetSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -18,8 +17,8 @@ public class NameCheck {
         this.subName = subName;
     }
 
-    public void check() throws MyException {
-        if(subName.contains("kurwa")) throw new MyException();
+    public void check() throws SwearException {
+        if(subName.contains("kurwa")) throw new SwearException();
     }
 
 

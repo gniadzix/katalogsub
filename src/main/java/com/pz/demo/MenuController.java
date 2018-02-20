@@ -2,26 +2,18 @@ package com.pz.demo;
 
 import com.pz.demo.DataBase.DBManager;
 import de.felixroske.jfxsupport.FXMLController;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.scene.web.WebView;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @FXMLController
 public class MenuController {
@@ -39,26 +31,17 @@ public class MenuController {
     TextField txfsearch;
     @FXML
     WebView wvVideo;
+    @FXML
+    private ListView listView;
 
     @Autowired
     private DBManager dbManager = DBManager.getInstance();
-    List<String> liquids = new ArrayList<>();
+    private ObservableList<String> liquids = FXCollections.observableArrayList();
+    private ObservableList<String> gas = FXCollections.observableArrayList();
+    private ObservableList<String> constSub = FXCollections.observableArrayList();
 
     public void goBack() {
         KatalogsubApplication.showView(LoginView.class);
-    }
-
-    public void loadMenus() {
-        MenuItem menuItem;
-        liquids = dbManager.loadLiquids();
-        for (int i = 0; i < liquids.size(); i++) {
-            menuCiecze.getItems().add(menuItem = new MenuItem(liquids.get(i)));
-            menuItem.setId(liquids.get(i));
-            final String nazwa = menuItem.getId();
-            menuItem.setOnAction(event -> {
-                loadData(nazwa);
-            });
-        }
     }
 
     public void search(KeyEvent keyEvent) {
@@ -66,16 +49,16 @@ public class MenuController {
             NameCheck name = new NameCheck(txfsearch.getText());
             try {
                 name.check();
-                if(dbManager.search(txfsearch.getText())){
+                dbManager.search(txfsearch.getText());
                     loadData(txfsearch.getText());
-                }
-            } catch (MyException ex) {
+
+            } catch (SwearException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Brak substancji");
                 alert.setHeaderText("Błędna nazwa substancji. Wprowadź poprawne dane. Nie przeklinaj");
                 alert.show();
             }
-            catch (NullPointerException ex){
+            catch (NullSubstanceException ex){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Brak substancji");
                 alert.setHeaderText("Błędna nazwa substancji. Wprowadź poprawne dane.");
@@ -99,5 +82,30 @@ public class MenuController {
             });
         });
         wvVideo.getEngine().load("https://www.youtube.com/embed/9bZkp7q19f0");
+    }
+
+    public void showLiquids() {
+        listView.setItems(null);
+        liquids = dbManager.loadLiquids();
+        listView.setItems(liquids);
+    }
+
+    public void selectSub(MouseEvent mouseEvent) {
+        try{
+            loadData(listView.getSelectionModel().getSelectedItem().toString());
+        }
+        catch (Exception ex){}
+    }
+
+    public void showGas() {
+        listView.setItems(null);
+        gas = dbManager.loadGas();
+        listView.setItems(gas);
+    }
+
+    public void showConstSubs() {
+        listView.setItems(null);
+        constSub = dbManager.loadConstSub();
+        listView.setItems(constSub);
     }
 }

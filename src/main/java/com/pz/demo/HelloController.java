@@ -20,9 +20,9 @@ public class HelloController {
             dbManager.loadTestData();
         }
         catch (Exception ex){}
-        finally {
-            menuController.loadMenus();
-        }
+        //finally {
+          //  menuController.loadMenus();
+        //}
         dbManager.printTestData();
     }
 

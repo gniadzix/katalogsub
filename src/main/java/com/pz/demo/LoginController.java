@@ -35,13 +35,10 @@ public class LoginController {
         hashedLogin = Hashing.sha256()
                 .hashString(txfLogin.getText(), StandardCharsets.UTF_8)
                 .toString();
-        if (hashedLogin.equals(user) && (hashedPasswd.equals(passwd))) {
-
-            KatalogsubApplication.showView(MenuAdminView.class);
-            menuAdminController.loadWindow();
-            txfLogin.clear();
-            txfPassword.clear();
-        } else {
+        try {
+            checkUser(hashedLogin, hashedPasswd);
+        }
+        catch (NotAdminException ex){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Błedny login lub hasło");
             alert.setHeaderText("Wprowadź poprawne dane");
@@ -53,5 +50,14 @@ public class LoginController {
         KatalogsubApplication.showView(HelloView.class);
         txfLogin.clear();
         txfPassword.clear();
+    }
+
+    public void checkUser(String login, String passwd) throws NotAdminException{
+        if (login.equals(user) && (passwd.equals(passwd))) {
+            KatalogsubApplication.showView(MenuAdminView.class);
+            menuAdminController.loadWindow();
+            txfLogin.clear();
+            txfPassword.clear();
+        } else throw new NotAdminException();
     }
 }
