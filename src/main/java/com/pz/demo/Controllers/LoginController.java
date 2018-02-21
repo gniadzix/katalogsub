@@ -1,14 +1,15 @@
-package com.pz.demo;
+package com.pz.demo.Controllers;
 
 import com.google.common.hash.Hashing;
+import com.pz.demo.KatalogsubApplication;
+import com.pz.demo.Views.MenuAdminView;
+import com.pz.demo.Exceptions.NotAdminException;
+import com.pz.demo.Views.HelloView;
 import de.felixroske.jfxsupport.FXMLController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.support.NullValue;
 
 import java.nio.charset.StandardCharsets;
 

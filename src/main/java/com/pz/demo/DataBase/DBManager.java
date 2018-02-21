@@ -1,6 +1,8 @@
 package com.pz.demo.DataBase;
 
-import com.pz.demo.NullSubstanceException;
+import com.pz.demo.Exceptions.NotPictureException;
+import com.pz.demo.Exceptions.NullSubstanceException;
+import com.pz.demo.Exceptions.WrongUrlException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,9 +70,15 @@ public class DBManager {
         return image;
     }
 
-    public void saveNewSubs(String nazwaSubstancji, String nazwaKategorii, String opis, String urlObrazka, String urlFilmu) {
-        long idKat = this.rodzajsubstancjiRepository.findRodzajsubstancjiByNazwaRodzaju(nazwaKategorii).getIdRodzaju();
-        this.substancjaRepository.save(Substancja.builder().nazwaSubstancji(nazwaSubstancji).idKategorii(idKat).opis(opis).urlObrazka(urlObrazka).urlFilmu(urlFilmu).build());
+    public void saveNewSubs(String nazwaSubstancji, String nazwaKategorii, String opis, String urlObrazka, String urlFilmu) throws WrongUrlException, NotPictureException {
+        if (urlFilmu.matches("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]")&& urlObrazka.matches("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]")) {
+            if(urlObrazka.contains("jpg")||(urlObrazka.contains("png"))) {
+                long idKat = this.rodzajsubstancjiRepository.findRodzajsubstancjiByNazwaRodzaju(nazwaKategorii).getIdRodzaju();
+                this.substancjaRepository.save(Substancja.builder().nazwaSubstancji(nazwaSubstancji).idKategorii(idKat).opis(opis).urlObrazka(urlObrazka).urlFilmu(urlFilmu).build());
+            }
+            else throw new NotPictureException();
+        }
+        else throw new WrongUrlException();
     }
 
     public void deleteSub(String subName) {
@@ -79,7 +87,8 @@ public class DBManager {
 
     public void search(String text) throws NullSubstanceException {
         try {
-            if (this.substancjaRepository.exists(this.substancjaRepository.findSubstancjaByNazwaSubstancji(text).getIdSubstancja()));
+            if (this.substancjaRepository.exists(this.substancjaRepository.findSubstancjaByNazwaSubstancji(text).getIdSubstancja()))
+                ;
         } catch (NullPointerException ex) {
             throw new NullSubstanceException();
         }

@@ -1,8 +1,11 @@
-package com.pz.demo;
+package com.pz.demo.Controllers;
 
 import com.pz.demo.DataBase.DBManager;
+import com.pz.demo.KatalogsubApplication;
+import com.pz.demo.Views.MenuView;
+import com.pz.demo.Exceptions.NotPictureException;
+import com.pz.demo.Exceptions.WrongUrlException;
 import de.felixroske.jfxsupport.FXMLController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
@@ -60,12 +63,25 @@ public class MenuAdminController {
         } else {
             try {
                 dbManager.saveNewSubs(txfName.getText(), dlGenere.getSelectionModel().getSelectedItem().toString(), txaDesc.getText(), txfPicUrl.getText(), txfVidUrl.getText());
-            } catch (Exception e) {
+            } catch (WrongUrlException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Błąd");
-                alert.setHeaderText("Nie udało zapisać się do bazy danych, spróbój ponownie");
+                alert.setHeaderText("Nie udało zapisać się do bazy danych, błędne adresy URL");
                 alert.show();
             }
+            catch (NotPictureException ex){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Błąd");
+                alert.setHeaderText("Nie udało zapisać się do bazy danych, link nie zawiera pliku graficznego");
+                alert.show();
+            }
+            catch (Exception ex){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Błąd");
+                alert.setHeaderText("Nie udało zapisać się do bazy danych");
+                alert.show();
+            }
+
             dbManager.printTestData();
         }
     }

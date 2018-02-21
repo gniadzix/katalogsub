@@ -1,6 +1,10 @@
-package com.pz.demo;
+package com.pz.demo.Controllers;
 
+import com.pz.demo.*;
 import com.pz.demo.DataBase.DBManager;
+import com.pz.demo.Exceptions.NullSubstanceException;
+import com.pz.demo.Exceptions.SwearException;
+import com.pz.demo.Views.LoginView;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,9 +50,9 @@ public class MenuController {
 
     public void search(KeyEvent keyEvent) {
         if(keyEvent.getCode() == KeyCode.ENTER) {
-            NameCheck name = new NameCheck(txfsearch.getText());
+            NameCheck name = new NameCheck();
             try {
-                name.check();
+                name.ifSwear(txfsearch.getText());
                 dbManager.search(txfsearch.getText());
                     loadData(txfsearch.getText());
 

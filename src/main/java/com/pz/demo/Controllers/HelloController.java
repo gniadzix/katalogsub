@@ -1,10 +1,11 @@
-package com.pz.demo;
+package com.pz.demo.Controllers;
 
 import com.pz.demo.DataBase.*;
+import com.pz.demo.KatalogsubApplication;
+import com.pz.demo.Views.LoginView;
+import com.pz.demo.Views.MenuView;
 import de.felixroske.jfxsupport.FXMLController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import org.springframework.beans.factory.annotation.Autowired;
 import twitter4j.Status;

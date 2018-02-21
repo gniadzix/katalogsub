@@ -1,9 +1,8 @@
-package com.pz.demo;
+package com.pz.demo.Views;
 
 import de.felixroske.jfxsupport.AbstractFxmlView;
 import de.felixroske.jfxsupport.FXMLView;
 
 @FXMLView
-public class MenuAdminView extends AbstractFxmlView{
-
+public class HelloView extends AbstractFxmlView{
 }

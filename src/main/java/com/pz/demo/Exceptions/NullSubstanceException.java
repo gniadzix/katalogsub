@@ -1,4 +1,4 @@
-package com.pz.demo;
+package com.pz.demo.Exceptions;
 
 
 public class NullSubstanceException extends Exception {
