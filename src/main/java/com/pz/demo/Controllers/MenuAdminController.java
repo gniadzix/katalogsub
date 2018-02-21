@@ -1,8 +1,9 @@
 package com.pz.demo.Controllers;
 
 import com.pz.demo.DataBase.DBManager;
+import com.pz.demo.ExLog;
 import com.pz.demo.KatalogsubApplication;
-import com.pz.demo.Views.MenuView;
+import com.pz.demo.MenuView;
 import com.pz.demo.Exceptions.NotPictureException;
 import com.pz.demo.Exceptions.WrongUrlException;
 import de.felixroske.jfxsupport.FXMLController;
@@ -35,11 +36,12 @@ public class MenuAdminController {
 
     @Autowired
     private DBManager dbManager = DBManager.getInstance();
+    @Autowired
+    private static ExLog exLog = ExLog.getInstance();
     List<String> generes = new ArrayList<>();
 
     public void openStart() {
         KatalogsubApplication.showView(MenuView.class);
-        //menuController.loadMenus();
         txaDesc.clear();
         txfName.clear();
         txfPicUrl.clear();
@@ -51,7 +53,6 @@ public class MenuAdminController {
         for (int i = 0; i < generes.size(); i++) {
             dlGenere.getItems().add(generes.get(i));
         }
-
     }
 
     public void newSub() {
@@ -68,18 +69,19 @@ public class MenuAdminController {
                 alert.setTitle("Błąd");
                 alert.setHeaderText("Nie udało zapisać się do bazy danych, błędne adresy URL");
                 alert.show();
-            }
-            catch (NotPictureException ex){
+                exLog.addError("Błędny adres url");
+            } catch (NotPictureException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Błąd");
                 alert.setHeaderText("Nie udało zapisać się do bazy danych, link nie zawiera pliku graficznego");
                 alert.show();
-            }
-            catch (Exception ex){
+                exLog.addError("Brak pliku graficznego");
+            } catch (Exception ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Błąd");
                 alert.setHeaderText("Nie udało zapisać się do bazy danych");
                 alert.show();
+                exLog.addError("Błąd zapisu do bazy danych");
             }
 
             dbManager.printTestData();
@@ -94,6 +96,7 @@ public class MenuAdminController {
             alert.setTitle("Brak substancji");
             alert.setHeaderText("Błędna nazwa substancji. Wprowadź poprawne dane");
             alert.show();
+            exLog.addError("Błąd usunięcia z bazy");
         }
     }
 

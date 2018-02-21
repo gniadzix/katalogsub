@@ -1,10 +1,11 @@
 package com.pz.demo.Controllers;
 
 import com.google.common.hash.Hashing;
+import com.pz.demo.ExLog;
 import com.pz.demo.KatalogsubApplication;
-import com.pz.demo.Views.MenuAdminView;
+import com.pz.demo.MenuAdminView;
 import com.pz.demo.Exceptions.NotAdminException;
-import com.pz.demo.Views.HelloView;
+import com.pz.demo.HelloView;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -24,6 +25,8 @@ public class LoginController {
 
     @Autowired
     private MenuAdminController menuAdminController;
+    @Autowired
+    private static ExLog exLog = ExLog.getInstance();
 
     private String hashedLogin;
     private String hashedPasswd;
@@ -44,6 +47,7 @@ public class LoginController {
             alert.setTitle("Błedny login lub hasło");
             alert.setHeaderText("Wprowadź poprawne dane");
             alert.show();
+            exLog.addError("Złe dane logowania");
         }
     }
 
@@ -54,7 +58,7 @@ public class LoginController {
     }
 
     public void checkUser(String login, String passwd) throws NotAdminException{
-        if (login.equals(user) && (passwd.equals(passwd))) {
+        if (login.equals(user) && (passwd.equals(this.passwd))) {
             KatalogsubApplication.showView(MenuAdminView.class);
             menuAdminController.loadWindow();
             txfLogin.clear();

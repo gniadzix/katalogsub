@@ -4,7 +4,7 @@ import com.pz.demo.*;
 import com.pz.demo.DataBase.DBManager;
 import com.pz.demo.Exceptions.NullSubstanceException;
 import com.pz.demo.Exceptions.SwearException;
-import com.pz.demo.Views.LoginView;
+import com.pz.demo.LoginView;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,6 +40,8 @@ public class MenuController {
 
     @Autowired
     private DBManager dbManager = DBManager.getInstance();
+    @Autowired
+    private static ExLog exLog = ExLog.getInstance();
     private ObservableList<String> liquids = FXCollections.observableArrayList();
     private ObservableList<String> gas = FXCollections.observableArrayList();
     private ObservableList<String> constSub = FXCollections.observableArrayList();
@@ -61,12 +63,14 @@ public class MenuController {
                 alert.setTitle("Brak substancji");
                 alert.setHeaderText("Błędna nazwa substancji. Wprowadź poprawne dane. Nie przeklinaj");
                 alert.show();
+                exLog.addError("Przekleństwo");
             }
             catch (NullSubstanceException ex){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Brak substancji");
                 alert.setHeaderText("Błędna nazwa substancji. Wprowadź poprawne dane.");
                 alert.show();
+                exLog.addError("Błędna nazwa substancji");
             }
         }
     }
@@ -98,7 +102,9 @@ public class MenuController {
         try{
             loadData(listView.getSelectionModel().getSelectedItem().toString());
         }
-        catch (Exception ex){}
+        catch (Exception ex){
+            exLog.addError("Błąd wyboru substancji");
+        }
     }
 
     public void showGas() {

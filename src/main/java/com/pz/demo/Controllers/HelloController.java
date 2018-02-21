@@ -1,9 +1,10 @@
 package com.pz.demo.Controllers;
 
 import com.pz.demo.DataBase.*;
+import com.pz.demo.ExLog;
 import com.pz.demo.KatalogsubApplication;
-import com.pz.demo.Views.LoginView;
-import com.pz.demo.Views.MenuView;
+import com.pz.demo.LoginView;
+import com.pz.demo.MenuView;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -23,12 +24,20 @@ public class HelloController {
     @FXML
     private Label lblTwitter;
 
+    @Autowired
+    private static ExLog exLog = ExLog.getInstance();
+    public HelloController() {
+        exLog.start();
+    }
+
     public void goToMenu() {
         KatalogsubApplication.showView(MenuView.class);
         try {
             dbManager.loadTestData();
         }
-        catch (Exception ex){}
+        catch (Exception ex){
+            exLog.addError("Błąd ładowania danych z bazy");
+        }
         dbManager.printTestData();
     }
 
