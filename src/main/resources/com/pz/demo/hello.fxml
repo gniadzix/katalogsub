@@ -2,30 +2,47 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pz.demo.Controllers.HelloController">
    <children>
-      <Label layoutX="45.0" layoutY="23.0" text="Aplikacja na zaliczenie przedmiotu programowanie zdarzeniowe.">
+      <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="354.0" layoutY="47.0" prefHeight="26.0" prefWidth="576.0" text="%title" textAlignment="CENTER">
+         <font>
+            <Font name="Lucida Bright Regular" size="22.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="347.0" layoutY="99.0" prefHeight="26.0" prefWidth="587.0" text="%subtitle" textAlignment="CENTER">
+         <font>
+            <Font name="Lucida Bright Regular" size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTwitter" contentDisplay="CENTER" layoutX="14.0" layoutY="556.0" prefHeight="75.0" prefWidth="1255.0">
          <font>
             <Font name="Lucida Bright Regular" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="104.0" layoutY="86.0" text="Katalog substancji niebezpiecznych/zabronionych">
+      <Button fx:id="btnGoToApp" layoutX="291.0" layoutY="460.0" mnemonicParsing="false" onAction="#goToMenu" prefHeight="54.0" prefWidth="189.0" text="%przejdz">
          <font>
-            <Font name="Lucida Bright Regular" size="16.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblTwitter" layoutX="104.0" layoutY="50.0" >
+            <Font size="15.0" />
+         </font></Button>
+      <Button fx:id="btnGoToAdmPane" layoutX="789.0" layoutY="460.0" mnemonicParsing="false" onAction="#openAdmPane" prefHeight="54.0" prefWidth="204.0" text="%zaloguj">
          <font>
-            <Font name="Lucida Bright Regular" size="16.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnGoToApp" layoutX="78.0" layoutY="272.0" mnemonicParsing="false" text="Przejdź do aplikacji" onAction="#goToMenu" />
-      <Button fx:id="btnGoToAdmPane" layoutX="368.0" layoutY="272.0" mnemonicParsing="false" text="Zaloguj jako Administrator" onAction="#openAdmPane" />
-      <Button  layoutX="368.0" layoutY="200.0" mnemonicParsing="false" text="Pokaż tweety" onAction="#loadTwitter" />
+            <Font size="15.0" />
+         </font></Button>
+      <Button layoutX="574.0" layoutY="652.0" mnemonicParsing="false" onAction="#loadTwitter" prefHeight="54.0" prefWidth="133.0" text="%pokaz">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
+      <ImageView fitHeight="294.0" fitWidth="321.0" layoutX="495.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@radiation_symbol_by_deiby_ybied-d3j18qt.gif" />
+         </image>
+      </ImageView>
+      <Button fx:id="pl" mnemonicParsing="false" text="PL" />
+      <Button fx:id="eng" layoutX="28.0" mnemonicParsing="false" text="ENG" />
 
    </children>
 </Pane>

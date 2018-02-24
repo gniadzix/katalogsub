@@ -59,4 +59,7 @@ public class HelloController {
                     status.getText());
         }
     }
+    public void language() {
+
+    }
 }
