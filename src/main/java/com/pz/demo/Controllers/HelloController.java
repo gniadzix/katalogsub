@@ -1,21 +1,28 @@
 package com.pz.demo.Controllers;
 
+import com.pz.demo.*;
 import com.pz.demo.DataBase.*;
-import com.pz.demo.ExLog;
-import com.pz.demo.KatalogsubApplication;
-import com.pz.demo.LoginView;
-import com.pz.demo.MenuView;
 import de.felixroske.jfxsupport.FXMLController;
+import de.felixroske.jfxsupport.FXMLView;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
+import java.lang.annotation.Annotation;
+import java.net.MalformedURLException;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 @FXMLController
 public class HelloController {
@@ -26,8 +33,19 @@ public class HelloController {
 
     @Autowired
     private static ExLog exLog = ExLog.getInstance();
+    @Autowired
+    private HelloView helloView;
+    @Autowired
+    private LoginView loginView;
+    @Autowired
+    private MenuAdminView menuAdminView;
+    @Autowired
+    private MenuView menuView;
+
+
     public HelloController() {
         exLog.start();
+
     }
 
     public void goToMenu() {
@@ -44,6 +62,7 @@ public class HelloController {
     public void openAdmPane() {
         KatalogsubApplication.showView(LoginView.class);
         dbManager.loadTestData();
+
     }
 
     public void loadTwitter() throws TwitterException {
@@ -59,7 +78,53 @@ public class HelloController {
                     status.getText());
         }
     }
-    public void language() {
 
+    public void changeStyleToRed(ActionEvent actionEvent){
+        String css = "";
+        try {
+            css = Paths.get("src/main/resources/com/pz/demo/red.css").toUri().toURL().toExternalForm();
+        } catch (MalformedURLException e) {
+
+
+        }
+        helloView.getView().getStylesheets().clear();
+        helloView.getView().getStylesheets().add(css);
+        loginView.getView().getStylesheets().clear();
+        loginView.getView().getStylesheets().add(css);
+        menuAdminView.getView().getStylesheets().clear();
+        menuAdminView.getView().getStylesheets().add(css);
+        menuView.getView().getStylesheets().clear();
+        menuView.getView().getStylesheets().add(css);
+    }
+
+    public void changeStyleToGreen(ActionEvent actionEvent){
+        String css = "";
+        try {
+            css = Paths.get("src/main/resources/com/pz/demo/green.css").toUri().toURL().toExternalForm();
+        } catch (MalformedURLException e) {
+        }
+        helloView.getView().getStylesheets().clear();
+        helloView.getView().getStylesheets().add(css);
+        loginView.getView().getStylesheets().clear();
+        loginView.getView().getStylesheets().add(css);
+        menuAdminView.getView().getStylesheets().clear();
+        menuAdminView.getView().getStylesheets().add(css);
+        menuView.getView().getStylesheets().clear();
+        menuView.getView().getStylesheets().add(css);
+    }
+    public void changeStyleToGrey(ActionEvent actionEvent){
+        String css = "";
+        try {
+            css = Paths.get("src/main/resources/com/pz/demo/grey.css").toUri().toURL().toExternalForm();
+        } catch (MalformedURLException e) {
+        }
+        helloView.getView().getStylesheets().clear();
+        helloView.getView().getStylesheets().add(css);
+        loginView.getView().getStylesheets().clear();
+        loginView.getView().getStylesheets().add(css);
+        menuAdminView.getView().getStylesheets().clear();
+        menuAdminView.getView().getStylesheets().add(css);
+        menuView.getView().getStylesheets().clear();
+        menuView.getView().getStylesheets().add(css);
     }
 }

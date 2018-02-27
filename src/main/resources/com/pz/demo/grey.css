@@ -1,0 +1,10 @@
+.button{
+    -fx-background-color: grey;
+    -fx-font-weight: bold;
+    -fx-text-fill: midnightblue;
+    -fx-border-color: #1f4051;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+.root{
+    -fx-background-color: cornsilk;
+}

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pz.demo.Controllers.HelloController">
+<Pane stylesheets="@style.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pz.demo.Controllers.HelloController">
    <children>
       <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="354.0" layoutY="47.0" prefHeight="26.0" prefWidth="576.0" text="%title" textAlignment="CENTER">
          <font>
@@ -41,8 +41,8 @@
             <Image url="@radiation_symbol_by_deiby_ybied-d3j18qt.gif" />
          </image>
       </ImageView>
-      <Button fx:id="pl" mnemonicParsing="false" text="PL" />
-      <Button fx:id="eng" layoutX="28.0" mnemonicParsing="false" text="ENG" />
-
+      <Button fx:id="red" mnemonicParsing="false" text="Zmiana skórki - czerwona" onAction="#changeStyleToRed" />
+      <Button fx:id="green" layoutY="28.0" mnemonicParsing="false" text="Zmiana skórki - zielona" onAction="#changeStyleToGreen" />
+      <Button fx:id="grey" layoutY="56.0" mnemonicParsing="false" text="Zmiana skórki - szara" onAction="#changeStyleToGrey" />
    </children>
 </Pane>
