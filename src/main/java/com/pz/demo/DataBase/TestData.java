@@ -25,7 +25,7 @@ public class TestData {
 
 
 
-        this.substancjaRepository.save(Substancja.builder().nazwaSubstancji("sperma szatana").idKategorii(this.rodzajsubstancjiRepository.findRodzajsubstancjiByNazwaRodzaju("ciecz").getIdRodzaju()).opis("Substancja z rodziny szatanusrejpus, powoduje narodziny antychrysta z numerem 666 na czole").urlObrazka("http://img.wiocha.pl/images/5/7/570b6fdc3fca255c1a0de64a6ec16a3d.jpg").build());
+        this.substancjaRepository.save(Substancja.builder().nazwaSubstancji("sperma szatana").idKategorii(this.rodzajsubstancjiRepository.findRodzajsubstancjiByNazwaRodzaju("ciecz").getIdRodzaju()).opis("Substancja z rodziny szatanusrejpus, powoduje narodziny antychrysta z numerem 666 na czole").urlObrazka("http://img.wiocha.pl/images/5/7/570b6fdc3fca255c1a0de64a6ec16a3d.jpg").urlFilmu("https://www.youtube.com/embed/9bZkp7q19f0").build());
 
 
     }

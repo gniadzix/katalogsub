@@ -69,6 +69,10 @@ public class DBManager {
         String image = this.substancjaRepository.findSubstancjaByNazwaSubstancji(nazwaSub).getUrlObrazka();
         return image;
     }
+    public String getVideo(String nazwaSub) {
+        String video = this.substancjaRepository.findSubstancjaByNazwaSubstancji(nazwaSub).getUrlFilmu();
+        return video;
+    }
 
     public void saveNewSubs(String nazwaSubstancji, String nazwaKategorii, String opis, String urlObrazka, String urlFilmu) throws WrongUrlException, NotPictureException {
         if (urlFilmu.matches("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]")&& urlObrazka.matches("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]")) {

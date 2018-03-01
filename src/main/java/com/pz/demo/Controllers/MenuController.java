@@ -89,7 +89,7 @@ public class MenuController {
                 mainGrid.getChildren().remove(pane);
             });
         });
-        wvVideo.getEngine().load("https://www.youtube.com/embed/9bZkp7q19f0");
+        wvVideo.getEngine().load(dbManager.getVideo(name));
     }
 
     public void showLiquids() {
