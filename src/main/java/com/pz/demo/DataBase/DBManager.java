@@ -115,7 +115,7 @@ public class DBManager {
         ObservableList<String> sub = FXCollections.observableArrayList();
         for (Substancja substancja : this.substancjaRepository.findAll()
                 ) {
-            if (substancja.getIdKategorii() == this.rodzajsubstancjiRepository.findRodzajsubstancjiByNazwaRodzaju("gaz").getIdRodzaju()) {
+            if (substancja.getIdKategorii() == this.rodzajsubstancjiRepository.findRodzajsubstancjiByNazwaRodzaju("stala").getIdRodzaju()) {
                 sub.add(substancja.getNazwaSubstancji());
             }
         }
